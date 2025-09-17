@@ -1,0 +1,14 @@
+.clock-body {
+    background-color: rgb(229, 55, 55);
+    height: 200px;
+    width: 400px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border-width:2px;
+    border-radius:20px;
+}
+
+.time-display {
+    font-size:2rem;
+}
