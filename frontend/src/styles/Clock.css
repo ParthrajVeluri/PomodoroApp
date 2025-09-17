@@ -1,0 +1,78 @@
+:root {
+    --clock-width: 400px;
+    --clock-height: 200px;
+}
+
+:root.pink {
+    --clock-bg: #fffafc;
+    --clock-border: #ffc1e3;
+    --time-bg: #fceaff;
+    --time-text: #5c4b51;
+
+    --btn-start: #ffb3ba;
+    --btn-stop: #ffdfba;
+    --btn-reset: #bae1ff;
+    --btn-accent: #fff5ba;
+    --btn-theme: #d8b4f2;
+}
+
+:root.green {
+    --clock-bg: #fefefe;
+    --clock-border: #b5ead7;
+    --time-bg: #e0f7fa;
+    --time-text: #37474f;
+
+    --btn-start: #b5ead7;
+    --btn-stop: #ffdac1;
+    --btn-reset: #c7ceea;
+    --btn-accent: #fff5ba;
+    --btn-theme: #a2cfb6;
+}
+
+.clock-body {
+    background-color: var(--clock-bg);
+    height: var(--clock-height);
+    width: var(--clock-width);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid var(--clock-border);
+    border-radius: 20px;
+    flex-direction: column;
+}
+
+.time-display {
+    display: flex;
+    flex: 0 1 0%;
+    font-size: 4rem;
+    justify-content: center;
+    align-items: center;
+    max-height: 70%;
+    background-color: var(--time-bg);
+    color: var(--time-text);
+    border-radius: 20px;
+}
+
+#stop-button {
+    background-color: var(--btn-stop);
+}
+
+#start-button {
+    background-color: var(--btn-start);
+}
+
+#reset-button {
+    background-color: var(--btn-reset);
+}
+
+#theme-button {
+    background-color: var(--btn-theme);
+}
+
+.timer-button {
+    flex: 0 0 25%;
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    margin-top: 3px;
+}
