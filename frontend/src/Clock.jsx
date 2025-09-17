@@ -1,36 +1,45 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./Clock.css";
 
-const STARTING_MINUTES = 2
-const START_TIME = 60*1000*STARTING_MINUTES
-const INTERVAL_TIME = 100
-
+let STARTING_MINUTES = 1;
+const START_TIME = 60 * 1000 * STARTING_MINUTES;
 
 function Clock() {
-    const [time, setTime] = useState(START_TIME)
-    const [referenceTime, setReferenceTime] = useState(Date.now())
+    const [time, setTime] = useState(START_TIME);
+    const [isRunning, setIsRunning] = useState(true);
+    const referenceTime = useRef(Date.now());
+    const intervalRef = useRef(null);
 
     useEffect(() => {
-        const countDown = () => {
-            setTime(prevTime => {
-                if (prevTime <= 0) return 0;
-                
+        if (isRunning) {
+            intervalRef.current = setInterval(() => {
                 const now = Date.now();
-                const elapsedTime = now - referenceTime;
-                const timeLeft = prevTime-elapsedTime;
-                setReferenceTime(now);
-                return timeLeft;
-            })
-
-            setTimeout(countDown, INTERVAL_TIME);
+                const elapsed = now - referenceTime.current;
+                referenceTime.current = now;
+                setTime((prevTime) => {
+                    const newTime = Math.max(prevTime - elapsed, 0);
+                    if (newTime === 0) {
+                        setIsRunning(false);
+                        clearInterval(intervalRef.current);
+                    }
+                    return newTime;
+                });
+            }, 100);
+        } else {
+            clearInterval(intervalRef.current);
         }
-    }, [time]);
+
+        return () => clearInterval(intervalRef.current);
+    }, []);
+
+    let seconds = Math.floor((time % (1000 * 60)) / 1000);
+    let minutes = Math.floor(time / (1000 * 60));
 
     return (
         <div className="clock-body">
             <div className="time-display">
                 <h1>
-                    {time/1000}
+                    {minutes.toString().padStart(2, "0")}:{seconds.toString().padStart(2, "0")}
                 </h1>
             </div>
         </div>
