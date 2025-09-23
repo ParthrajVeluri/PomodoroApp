@@ -1,17 +1,25 @@
 import { useEffect, useState, useRef } from "react";
 import "../styles/Clock.css";
+import timerEnd from "../assets/timer-end.mp3";
 
-let STARTING_MINUTES = 30;
-const START_TIME = 60 * 1000 * STARTING_MINUTES;
+const timerEndSound = new Audio(timerEnd);
 
-function Clock() {
+function Clock({ startingMinutes = 30, theme }) {
+    const START_TIME = 60 * 1000 * startingMinutes;
+    const clockTheme = theme;
+
     const [time, setTime] = useState(START_TIME);
     const [isRunning, setIsRunning] = useState(false);
-    const [theme, setTheme] = useState("green");
     const referenceTime = useRef(Date.now());
     const intervalRef = useRef(null);
 
+    useEffect(() => {
+        setTime(START_TIME);
+        setIsRunning(false);
+    }, [startingMinutes]);
+
     //Timer countdown logic
+    //Date.now() is used to prevent drift in time
     useEffect(() => {
         if (isRunning) {
             intervalRef.current = setInterval(() => {
@@ -21,8 +29,8 @@ function Clock() {
                 setTime((prevTime) => {
                     const newTime = Math.max(prevTime - elapsed, 0);
                     if (newTime === 0) {
-                        setIsRunning(false);
-                        clearInterval(intervalRef.current);
+                        timerEndSound.play();
+                        resetTimer();
                     }
                     return newTime;
                 });
@@ -32,17 +40,6 @@ function Clock() {
         }
         return () => clearInterval(intervalRef.current);
     }, [isRunning]);
-
-    //Theme switch logic
-    useEffect(() => {
-        document.documentElement.className = theme;
-    }, [theme]);
-
-    //Cycling Defined Themes
-    const cycleTheme = () => {
-        if (theme === "green") setTheme("pink");
-        else if (theme === "pink") setTheme("green");
-    };
 
     const startTimer = () => {
         if (!isRunning) {
@@ -66,14 +63,14 @@ function Clock() {
     let minutes = Math.floor(time / (1000 * 60));
 
     return (
-        <div style={{ justifyContent: "center", display: "flex", flexDirection: "column" }}>
-            <div className="clock-body">
-                <div className="time-display">
+        <div className={`clock ${clockTheme}`} style={{ justifyContent: "center", display: "flex", flexDirection: "column" }}>
+            <div id="clock-body">
+                <div id="time-display">
                     <h1>
                         {minutes.toString().padStart(2, "0")}:{seconds.toString().padStart(2, "0")}
                     </h1>
                 </div>
-                <div className="timer-button">
+                <div id="timer-button">
                     <button id="start-button" onClick={startTimer}>
                         Start
                     </button>
@@ -85,9 +82,6 @@ function Clock() {
                     </button>
                 </div>
             </div>
-            <button id="theme-button" onClick={cycleTheme}>
-                Change Theme
-            </button>
         </div>
     );
 }

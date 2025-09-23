@@ -1,10 +1,10 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import {Clock} from './components/Clock.jsx'
+import {MainPage} from './routes/MainPage.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Clock/>
+    <MainPage/>
   </StrictMode>,
 )
