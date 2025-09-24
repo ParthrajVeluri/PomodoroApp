@@ -1,12 +1,11 @@
 import { Clock } from "../components/Clock.jsx";
 import { Navbar } from "../components/Navbar.jsx";
+import { useOutletContext } from "react-router-dom";
 import { useState } from "react";
 import "../styles/MainPage.css";
 
 function MainPage() {
-    const [pomodoroMinutes, setPomodoroMinutes] = useState(30);
-    const [shortBreakMinutes, setShortBreakMinutes] = useState(5);
-    const [longBreakMinutes, setLongBreakMinutes] = useState(15);
+    const { pomodoroMinutes, shortBreakMinutes, longBreakMinutes } = useOutletContext();
     const [currentType, setCurrentType] = useState("pomodoro");
 
     const clockTypes = {
@@ -31,19 +30,11 @@ function MainPage() {
     };
 
     return (
-        <>
-            <Navbar
-                pomodoroMinutes={pomodoroMinutes}
-                longBreakMinutes={longBreakMinutes}
-                shortBreakMinutes={shortBreakMinutes}
-                setPomodoroMinutes={setPomodoroMinutes}
-                setShortBreakMinutes={setShortBreakMinutes}
-                setLongBreakMinutes={setLongBreakMinutes}
-            ></Navbar>
+        <main className="main-page">
             <div className={`main-container ${clockTypes.theme}`}>
                 <div id="clock-types-btn">
                     <button id="pomodoro-btn" onClick={switchToPomodoro}>
-                        Pomodoro
+                        Work Time
                     </button>
                     <button id="short-break-btn" onClick={switchToShortBreak}>
                         Short Break
@@ -54,7 +45,7 @@ function MainPage() {
                 </div>
                 <Clock startingMinutes={clockTypes.minutes} theme={clockTypes.theme} />
             </div>
-        </>
+        </main>
     );
 }
 

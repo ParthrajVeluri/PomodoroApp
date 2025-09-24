@@ -8,7 +8,7 @@
     background-color: var(--navbar-bg);
     position: fixed;
     border-bottom: 1px solid var(--navbar-border);
-    height: 10%;
+    height: 50px;
     top: 0;
     left: 0;
     width: 100%;

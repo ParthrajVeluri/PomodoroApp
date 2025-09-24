@@ -1,0 +1,27 @@
+.rewards-page {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    overflow-x: hidden;
+}
+
+.rewards-container {
+    display: flex;
+    flex-direction: column;
+    width: 75vw;
+    height: fit-content;
+    margin-top: 10%;
+}
+
+.rewards-header h1 {
+    border-bottom: 2px solid black;
+    color: var(--color-title-text);
+}
+
+.prizes-box {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+}

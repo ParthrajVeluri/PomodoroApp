@@ -1,0 +1,68 @@
+:root {
+    /* Pastel Color Palette */
+    /* Background: Light creamy beige */
+
+    /* Card / Container */
+    --color-container-bg: #e8f8ff; /* very light pastel blue */
+    --color-container-border: #d4efff; /* subtle blue border */
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+
+    /* Title / Header */
+    --color-title-text: #4a4a4a; /* soft dark gray */
+
+    /* Redeem / Call-to-action */
+    --color-redeem-bg: #d0f0ff; /* light pastel cyan/blue */
+    --color-text: #4a4a4a; /* soft dark gray */
+}
+
+.reward-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 200px;
+    min-width: 200px;
+    border: 1px solid var(--color-container-border);
+    border-radius: 8px;
+    box-shadow: var(--box-shadow);
+}
+
+.points-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.redeem-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+    background-color: var(--color-redeem-bg);
+    color: var(--color-text);
+}
+
+.points-label img {
+    max-width: 30px;
+    max-height: 30px;
+}
+
+.reward-title-container {
+    display: flex;
+    flex: 1;
+    height: min-content;
+    width: 100%;
+    overflow: hidden;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
+    overflow-wrap: anywhere;
+    text-overflow: ellipsis;
+    font-weight: bold;
+    background-color: var(--color-container-bg);
+    border-top-right-radius: 7px;
+    border-top-left-radius: 7px;
+    color: var(--color-text);
+}

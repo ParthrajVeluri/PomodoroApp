@@ -63,26 +63,28 @@ function Clock({ startingMinutes = 30, theme }) {
     let minutes = Math.floor(time / (1000 * 60));
 
     return (
-        <div className={`clock ${clockTheme}`} style={{ justifyContent: "center", display: "flex", flexDirection: "column" }}>
-            <div id="clock-body">
-                <div id="time-display">
-                    <h1>
-                        {minutes.toString().padStart(2, "0")}:{seconds.toString().padStart(2, "0")}
-                    </h1>
-                </div>
-                <div id="timer-button">
-                    <button id="start-button" onClick={startTimer}>
-                        Start
-                    </button>
-                    <button id="stop-button" onClick={stopTimer}>
-                        Stop
-                    </button>
-                    <button id="reset-button" onClick={resetTimer}>
-                        Reset
-                    </button>
+        <main>
+            <div className={`clock ${clockTheme}`} style={{ justifyContent: "center", display: "flex", flexDirection: "column" }}>
+                <div id="clock-body">
+                    <div id="time-display">
+                        <h1>
+                            {isNaN(minutes) || isNaN(seconds) ? "00:00" : `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`}
+                        </h1>
+                    </div>
+                    <div id="timer-button">
+                        <button id="start-button" onClick={startTimer}>
+                            Start
+                        </button>
+                        <button id="stop-button" onClick={stopTimer}>
+                            Stop
+                        </button>
+                        <button id="reset-button" onClick={resetTimer}>
+                            Reset
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </main>
     );
 }
 

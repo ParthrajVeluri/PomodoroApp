@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "../styles/Navbar.css";
+import { Link } from "react-router-dom";
 import gearWheel from "../assets/gearwheel.png";
 import points from "../assets/points.webp";
 
@@ -7,18 +8,17 @@ function Navbar({ pomodoroMinutes, setPomodoroMinutes, shortBreakMinutes, setSho
     const [pomodoroPoints, setPomodoroPoints] = useState(0);
     const [displayDropdown, setDisplayDropdown] = useState(false);
 
-
     return (
-        <nav className={`navbar theme`} >
+        <nav className={`navbar theme`}>
             <div className="navbar-left">
                 <h1 id="logo">Gamify</h1>
             </div>
 
             <div className="navbar-center">
                 <ul className="nav-links">
-                    <a href="https://www.google.com/">Home</a>
-                    <a href="https://www.google.com/">Rewards</a>
-                    <a href="https://www.google.com/">Statistics</a>
+                    <Link to="/">Home</Link>
+                    <Link to="/rewards">Rewards</Link>
+                    <Link to="/statistics">Statistics</Link>
                 </ul>
             </div>
             <div className="navbar-right">
@@ -29,7 +29,7 @@ function Navbar({ pomodoroMinutes, setPomodoroMinutes, shortBreakMinutes, setSho
                 {/*Tab index makes element keyboard focusable which then allows us to use onFocus and onBlur effects */}
                 {/*onBlur effect happens anytime you focus (press tab) off the current element */}
                 {/*tabIndex={0} onBlur={() => setDisplayDropdown(false)}*/}
-                <div className="settings-container" >
+                <div className="settings-container">
                     <img className="icon" id="settings-icon" onClick={() => setDisplayDropdown(!displayDropdown)} alt="Settings" src={gearWheel}></img>
                     {displayDropdown && (
                         <div className="settings-dropdown">
